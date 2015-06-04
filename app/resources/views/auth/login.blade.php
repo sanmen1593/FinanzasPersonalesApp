@@ -17,7 +17,7 @@
 							</ul>
 						</div>
 					@endif
-
+					<a href="/login/google">Login with Google</a>
 					<form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/login') }}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 

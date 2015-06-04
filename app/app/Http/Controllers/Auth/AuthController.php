@@ -4,6 +4,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use App\AuthenticateUser;
+use Request;
 
 class AuthController extends Controller {
 
@@ -34,5 +36,15 @@ class AuthController extends Controller {
 
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
+
+	public function login(AuthenticateUser $authenticateUser, Request $request, $provider = null) {
+       $requestinfo = Request::all();
+       return $authenticateUser->execute($requestinfo, $this, $provider);
+    }
+
+    public function userHasLoggedIn($user) {
+        \Session::flash('message', 'Welcome, ' . $user->username);
+        return redirect('/home');
+    }
 
 }
