@@ -2,7 +2,7 @@
 // AuthenticateUser.php 
 use Illuminate\Contracts\Auth\Guard; 
 use Laravel\Socialite\Contracts\Factory as Socialite; 
-use App\Models\UserRepository;
+use App\Repositories\UserRepository;
 use Request; 
 
 class AuthenticateUser {     
@@ -19,8 +19,8 @@ class AuthenticateUser {
 
     public function execute($request, $listener, $provider) {
        if (!$request) return $this->getAuthorizationFirst($provider);
+       
        $user = $this->users->findByUserNameOrCreate($this->getSocialUser($provider));
-
        $this->auth->login($user, true);
 
        return $listener->userHasLoggedIn($user);
@@ -31,6 +31,6 @@ class AuthenticateUser {
     }
 
     private function getSocialUser($provider) {
-        return $this->socialite->driver($provider)->user();
+        return $this->socialite->driver('google')->user();
     }
 }

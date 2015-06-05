@@ -36,8 +36,14 @@ return [
 	],
 
 	'google' => [
-		'client_id' => env('GOOGLE_CLIENT_ID'),
-		'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-		'redirect' => 'http://localhost:8000/login/google'
+		'client_id' 	=> '84175406552-5p362cjduabvhpi8sceq12jfgparb3r0.apps.googleusercontent.com',//env('GOOGLE_CLIENT_ID'),
+		'client_secret' => 'dlDK-2j-PBb7mSlg6aXuCl-c', //env('GOOGLE_CLIENT_SECRET'),
+		'redirect' 		=> 'http://localhost:8001/login/google'
 	],
+
+	'github' => [
+		'client_id'		=> '79c9c4755bf47c7154a0',
+		'client_secret'	=> 'b7aa8ea34f79798802d878f4a2e335daad4821f7',
+		'redirect'		=> 'http://localhost:8001/login/github'
+	]
 ];

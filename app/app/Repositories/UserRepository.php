@@ -1,18 +1,19 @@
-<?php namespace App\Models;
+<?php namespace App\Repositories;
 
 use App\User;
 
 class UserRepository {
     public function findByUserNameOrCreate($userData) {
-        $user = User::where('provider_id', '=', $userData->id)->first();
+        $user = User::where('email', '=', $userData->email)->first();
         if(!$user) {
             $user = User::create([
-                'provider_id' => $userData->id,
-                'name' => $userData->name,
-                'username' => $userData->nickname,
-                'email' => $userData->email,
-                'avatar' => $userData->avatar,
-                'active' => 1,
+                'provider_id'   => $userData->id,
+                'token'         => $userData->token,
+                'name'          => $userData->name,
+                'username'      => $userData->nickname,
+                'email'         => $userData->email,
+                'avatar'        => $userData->avatar,
+                'active'        => 1,
             ]);
         }
 
@@ -27,12 +28,14 @@ class UserRepository {
             'email' => $userData->email,
             'name' => $userData->name,
             'username' => $userData->nickname,
+            'token'     => $userData->token,
         ];
         $dbData = [
             'avatar' => $user->avatar,
             'email' => $user->email,
             'name' => $user->name,
             'username' => $user->username,
+            'token'     => $user->token,
         ];
 
         if (!empty(array_diff($socialData, $dbData))) {
@@ -40,6 +43,7 @@ class UserRepository {
             $user->email = $userData->email;
             $user->name = $userData->name;
             $user->username = $userData->nickname;
+            $user->token = $userData->token;
             $user->save();
         }
     }
